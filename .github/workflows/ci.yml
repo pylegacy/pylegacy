@@ -57,3 +57,40 @@ jobs:
           set -e
           . /etc/profile
           if [ -x "$(command -v pylint)" ]; then pylint src test; fi
+
+  build:
+    needs: lint
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python_version:
+          [
+            "2.6",
+            "2.7",
+            "3.2",
+            "3.3",
+            "3.4",
+            "3.5",
+            "3.6",
+            "3.7",
+            "3.8",
+            "3.9",
+          ]
+      max-parallel: 6
+    container: "tinybases/python:${{ matrix.python_version }}-debian-5"
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v1
+      -
+        name: Print environment
+        run: |
+          set -e
+          . /etc/profile
+          python -V
+      -
+        name: Build wheel
+        run: |
+          set -e
+          . /etc/profile
+          python setup.py bdist_wheel --universal
