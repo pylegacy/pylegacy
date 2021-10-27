@@ -40,10 +40,6 @@ jobs:
         run: |
           set -e
           . /etc/profile
-          if [ "${{ matrix.python_version }}" = "2.6" ]; then
-            wget http://pylegacy.org/hub/get-pip-pyopenssl.py -O /tmp/get-pip-pyopenssl.py
-            python /tmp/get-pip-pyopenssl.py
-          fi
           pip install -r requirements-dev.txt
       -
         name: Run Flake8
@@ -142,10 +138,6 @@ jobs:
         run: |
           set -e
           . /etc/profile
-          if [ "${{ matrix.python_version }}" = "2.6" ]; then
-            wget http://pylegacy.org/hub/get-pip-pyopenssl.py -O /tmp/get-pip-pyopenssl.py
-            python /tmp/get-pip-pyopenssl.py
-          fi
           pip install -r requirements-dev.txt
       -
         name: Install package
