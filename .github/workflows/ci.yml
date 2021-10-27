@@ -1,0 +1,59 @@
+name: ci
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+
+  lint:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python_version:
+          [
+            "2.6",
+            "2.7",
+            "3.2",
+            "3.3",
+            "3.4",
+            "3.5",
+            "3.6",
+            "3.7",
+            "3.8",
+            "3.9",
+          ]
+      max-parallel: 6
+    container: "tinybases/python:${{ matrix.python_version }}-debian-5"
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v1
+      -
+        name: Print environment
+        run: |
+          set -e
+          . /etc/profile
+          python -V
+      -
+        name: Install dev requirements
+        run: |
+          set -e
+          . /etc/profile
+          if [ "${{ matrix.python_version }}" = "2.6" ]; then
+            wget http://pylegacy.org/hub/get-pip-pyopenssl.py -O /tmp/get-pip-pyopenssl.py
+            python /tmp/get-pip-pyopenssl.py
+          fi
+          pip install -r requirements-dev.txt
+      -
+        name: Run Flake8
+        run: |
+          set -e
+          . /etc/profile
+          if [ -x "$(command -v flake8)" ]; then flake8; fi
+      -
+        name: Run PyLint
+        run: |
+          set -e
+          . /etc/profile
+          if [ -x "$(command -v pylint)" ]; then pylint src test; fi
