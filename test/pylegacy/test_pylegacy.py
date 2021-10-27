@@ -1,4 +1,5 @@
 """Import test for :mod:`pylegacy`."""
+# pylint: disable=import-error
 from __future__ import print_function
 
 import re
@@ -14,7 +15,6 @@ class TestPyLegacy(unittest.TestCase):
     def test_import(self):
         """Test that basic library import is working."""
 
-        # pylint: disable=import-error
         import pylegacy
 
         version = pylegacy.__version__

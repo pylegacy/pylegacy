@@ -1,4 +1,5 @@
 """Tests for :mod:`pylegacy.os`."""
+# pylint: disable=import-error
 from __future__ import print_function
 
 import sys
