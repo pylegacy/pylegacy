@@ -94,3 +94,69 @@ jobs:
           set -e
           . /etc/profile
           python setup.py bdist_wheel --universal
+      -
+        name: Upload artifacts
+        uses: actions/upload-artifact@v1
+        with:
+          name: artifacts-${{ matrix.python_version }}
+          path: dist
+
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python_version:
+          [
+            "2.6",
+            "2.7",
+            "3.2",
+            "3.3",
+            "3.4",
+            "3.5",
+            "3.6",
+            "3.7",
+            "3.8",
+            "3.9",
+          ]
+      max-parallel: 6
+    container: "tinybases/python:${{ matrix.python_version }}-debian-5"
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v1
+      -
+        name: Download artifacts
+        uses: actions/download-artifact@v1
+        with:
+          name: artifacts-${{ matrix.python_version }}
+          path: dist
+      -
+        name: Print environment
+        run: |
+          set -e
+          . /etc/profile
+          python -V
+      -
+        name: Install dev requirements
+        run: |
+          set -e
+          . /etc/profile
+          if [ "${{ matrix.python_version }}" = "2.6" ]; then
+            wget http://pylegacy.org/hub/get-pip-pyopenssl.py -O /tmp/get-pip-pyopenssl.py
+            python /tmp/get-pip-pyopenssl.py
+          fi
+          pip install -r requirements-dev.txt
+      -
+        name: Install package
+        run: |
+          set -e
+          . /etc/profile
+          pip install dist/*.whl
+      -
+        name: Test package
+        run: |
+          set -e
+          . /etc/profile
+          pkg=$(find src -mindepth 1 -maxdepth 1 -type d | head -n1 | xargs basename)
+          python -m pytest --cov="${pkg}"
