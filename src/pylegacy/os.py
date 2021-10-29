@@ -18,7 +18,7 @@ if __sys.version_info[:2] < (3, 2):
 
     # Backport info:
     # - Python 3.2: first appeareance.
-    def makedirs(name, mode=511, exist_ok=False):
+    def makedirs(name, mode=0o777, exist_ok=False):
         """Create a leaf directory and all intermediate ones.
 
         It works like :func:`~os.mkdir`, except that any intermediate path
