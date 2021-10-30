@@ -36,7 +36,7 @@ if __sys.version_info[:2] < (3, 2):
                 return
             raise
 
-    __all__ = tuple(sorted(__all__ + ("makedirs",)))
+    __all__.append("makedirs")
 
 # Remove temporary imports.
 del __sys

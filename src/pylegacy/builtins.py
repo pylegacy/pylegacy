@@ -11,8 +11,8 @@ try:
 except ImportError:
     from __builtin__ import *
     from __builtin__ import __doc__
-__all__ = tuple(sorted(__k for __k in globals().keys()
-                       if not (__k.startswith("__") or __k.endswith("__"))))
+__all__ = sorted(__k for __k in globals().keys()
+                 if not (__k.startswith("__") or __k.endswith("__")))
 
 # Start with backports.
 if __sys.version_info[:2] < (3, 2):
@@ -22,7 +22,7 @@ if __sys.version_info[:2] < (3, 2):
     class ResourceWarning(Warning):
         """Base class for warnings about resource usage."""
 
-    __all__ = tuple(sorted(__all__ + ("ResourceWarning",)))
+    __all__.append("ResourceWarning")
 
 # Remove temporary imports.
 del __sys
