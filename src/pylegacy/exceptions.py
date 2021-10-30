@@ -11,6 +11,7 @@ if __sys.version_info[:1] < (3,):
     from exceptions import __doc__
 
     # Import backported warnings.
+    # pylint: disable=unused-import
     from . builtins import ResourceWarning
 
 else:
