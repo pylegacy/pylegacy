@@ -1,6 +1,4 @@
 """Import test for :mod:`pylegacy`."""
-# pylint: disable=import-error
-from __future__ import print_function
 
 import re
 import unittest2 as unittest

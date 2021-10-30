@@ -5,19 +5,16 @@ from __future__ import absolute_import
 import sys as __sys
 
 # Import `os` members.
-from os import __dict__ as __dict
-for __k, __v in __dict.items():
-    if not (__k.startswith("__") and __k.endswith("__")) or __k == "__doc__":
-        globals().update({__k: __v})
-    del __k
-    del __v
-del __dict
+from os import *
+from os import __all__
+from os import __doc__
 
 # Start with backports.
 if __sys.version_info[:2] < (3, 2):
 
     # Backport info:
     # - Python 3.2: first appeareance.
+    # pylint: disable=redefined-outer-name
     def makedirs(name, mode=0o777, exist_ok=False):
         """makedirs(name [, mode=0o777][, exist_ok=False])
 
@@ -38,6 +35,8 @@ if __sys.version_info[:2] < (3, 2):
             if exist_ok and os.path.isdir(name) and err.errno == errno.EEXIST:
                 return
             raise
+
+    __all__ = tuple(sorted(__all__ + ("makedirs",)))
 
 # Remove temporary imports.
 del __sys

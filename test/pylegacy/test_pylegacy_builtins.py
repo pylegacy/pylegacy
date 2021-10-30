@@ -1,7 +1,4 @@
 """Tests for :mod:`pylegacy.builtins`."""
-# pylint: disable=import-error
-# flake8: noqa: F821
-from __future__ import print_function
 
 import sys
 import unittest2 as unittest
@@ -19,7 +16,8 @@ class TestPyLegacyBuiltins(unittest.TestCase):
 
         def test_callable():
             """Helper function."""
-            return ResourceWarning  # pylint: disable=undefined-variable
+            # pylint: disable=undefined-variable
+            return ResourceWarning  # noqa: F821
 
         self.assertRaises(NameError, test_callable)
 

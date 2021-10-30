@@ -6,15 +6,13 @@ import sys as __sys
 
 # Import `builtins` members.
 try:
-    from builtins import __dict__ as __dict
+    from builtins import *
+    from builtins import __doc__
 except ImportError:
-    from __builtin__ import __dict__ as __dict
-for __k, __v in __dict.items():
-    if not (__k.startswith("__") and __k.endswith("__")) or __k == "__doc__":
-        globals().update({__k: __v})
-    del __k
-    del __v
-del __dict
+    from __builtin__ import *
+    from __builtin__ import __doc__
+__all__ = tuple(sorted(__k for __k in globals().keys()
+                       if not (__k.startswith("__") or __k.endswith("__"))))
 
 # Start with backports.
 if __sys.version_info[:2] < (3, 2):
@@ -23,6 +21,8 @@ if __sys.version_info[:2] < (3, 2):
     # - Python 3.2: first appeareance.
     class ResourceWarning(Warning):
         """Base class for warnings about resource usage."""
+
+    __all__ = tuple(sorted(__all__ + ("ResourceWarning",)))
 
 # Remove temporary imports.
 del __sys
