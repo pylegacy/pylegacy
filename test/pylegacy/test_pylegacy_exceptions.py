@@ -10,17 +10,6 @@ class TestPyLegacyExceptions(unittest.TestCase):
     def setUp(self):
         """Define the test scope variables."""
 
-    @unittest.skipIf(sys.version_info[:2] >= (3, 2), reason="no backport")
-    def test_resourcewarning_missing(self):
-        """Test that :class:`ResourceWarning` does not exist."""
-
-        def test_callable():
-            """Helper function."""
-            # pylint: disable=undefined-variable
-            return ResourceWarning  # noqa: F821
-
-        self.assertRaises(NameError, test_callable)
-
     def test_resourcewarning_available(self):
         """Test that :class:`ResourceWarning` exists with :mod:`pylegacy`."""
 
