@@ -66,6 +66,7 @@ disable=assignment-from-no-return,
         global-variable-not-assigned,
         global-variable-undefined,
         import-outside-toplevel,
+        redefined-builtin,
         useless-object-inheritance,
         super-with-arguments,
         raise-missing-from

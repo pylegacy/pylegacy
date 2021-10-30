@@ -16,5 +16,13 @@ for __k, __v in __dict.items():
     del __v
 del __dict
 
+# Start with backports.
+if __sys.version_info[:2] < (3, 2):
+
+    # Backport info:
+    # - Python 3.2: first appeareance.
+    class ResourceWarning(Warning):
+        """Base class for warnings about resource usage."""
+
 # Remove temporary imports.
 del __sys
