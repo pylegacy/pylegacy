@@ -8,6 +8,7 @@ import sys as __sys
 from os import *
 from os import __all__
 from os import __doc__
+__all__ = list(__all__)
 
 # Start with backports.
 if __sys.version_info[:2] < (3, 2):
