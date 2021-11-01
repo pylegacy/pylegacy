@@ -258,6 +258,48 @@ class TestPyLegacyDatetime(unittest.TestCase):
 
         self.assertRaises(ValueError, tz.fromutc, dtobj)
 
+    def test_pylegacy_timezone_str(self):
+        """Test `str` for :class:`pylegacy.datetime.timezone` objects."""
+
+        from pylegacy import datetime as dt
+
+        offset = dt.timedelta(hours=1)
+        tz = dt.timezone(offset)
+
+        self.assertEqual(str(tz), tz.tzname(None))
+
+    def test_pylegacy_timezone_repr_utc(self):
+        """Test `repr` for :class:`pylegacy.datetime.timezone` objects."""
+
+        from pylegacy import datetime as dt
+
+        offset = dt.timedelta(hours=0)
+        tz = dt.timezone(offset)
+
+        self.assertEqual(repr(tz), "datetime.timezone.utc")
+
+    def test_pylegacy_timezone_repr_giving_name(self):
+        """Test `repr` for :class:`pylegacy.datetime.timezone` objects."""
+
+        from pylegacy import datetime as dt
+
+        offset = dt.timedelta(hours=2)
+        tz = dt.timezone(offset, name="Athens time")
+
+        result = "datetime.timezone({0}, 'Athens time')".format(repr(offset))
+        self.assertEqual(repr(tz), result)
+
+    def test_pylegacy_timezone_repr_not_giving_name(self):
+        """Test `repr` for :class:`pylegacy.datetime.timezone` objects."""
+
+        from pylegacy import datetime as dt
+
+        offset = dt.timedelta(hours=2)
+        tz = dt.timezone(offset)
+
+        result = "datetime.timezone({0})".format(repr(offset))
+        self.assertEqual(repr(tz), result)
+
 
 if __name__ == "__main__":
     unittest.main()
