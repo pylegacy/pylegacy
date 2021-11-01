@@ -125,7 +125,8 @@ if __sys.version_info[:2] < (3, 2):
                 delta = -delta
             else:
                 sign = "+"
-            total = int(delta.total_seconds())
+            total = int(delta.days * 86400 + delta.seconds +
+                        delta.microseconds * 1E-6)
             hours, minutes = total // 3600, (total % 3600) // 60
             return "UTC{0}{1:02d}:{2:02d}".format(sign, hours, minutes)
 
