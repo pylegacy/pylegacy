@@ -125,8 +125,8 @@ if __sys.version_info[:2] < (3, 2):
                 delta = -delta
             else:
                 sign = "+"
-            hours, rest = divmod(delta, timedelta(hours=1))
-            minutes = rest // timedelta(minutes=1)
+            total = int(delta.total_seconds())
+            hours, minutes = total // 3600, (total % 3600) // 60
             return "UTC{0}{1:02d}:{2:02d}".format(sign, hours, minutes)
 
     timezone.utc = timezone._create(timedelta(0))
