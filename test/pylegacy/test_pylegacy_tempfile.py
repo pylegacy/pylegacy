@@ -10,7 +10,7 @@ class TestPyLegacyTempfile(unittest.TestCase):
     def setUp(self):
         """Define the test scope variables."""
 
-    @unittest.skipIf(sys.version_info[:2] >= (3, 2), reason="no backport")
+    @unittest.skipIf(sys.version_info[:2] >= (3, 2), reason="it exists")
     def test_temporarydirectory_missing(self):
         """Test that :class:`~tempfile.TemporaryDirectory` does not exist."""
 

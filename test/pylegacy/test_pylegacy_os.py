@@ -10,14 +10,14 @@ class TestPyLegacyOs(unittest.TestCase):
     def setUp(self):
         """Define the test scope variables."""
 
-    @unittest.skipIf(sys.version_info[:2] >= (3, 2), reason="no backport")
+    @unittest.skipIf(sys.version_info[:2] >= (3, 2), reason="it has exist_ok")
     def test_os_makedirs_error_args(self):
         """Test that :func:`os.makedirs` does not have `exist_ok` arg."""
 
         import os
         self.assertRaises(TypeError, os.makedirs, "dummy", 511, True)
 
-    @unittest.skipIf(sys.version_info[:2] >= (3, 2), reason="no backport")
+    @unittest.skipIf(sys.version_info[:2] >= (3, 2), reason="it has exist_ok")
     def test_os_makedirs_error_kwargs(self):
         """Test that :func:`os.makedirs` does not have `exist_ok` kwarg."""
 

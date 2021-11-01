@@ -10,7 +10,7 @@ class TestPyLegacyBuiltins(unittest.TestCase):
     def setUp(self):
         """Define the test scope variables."""
 
-    @unittest.skipIf(sys.version_info[:2] >= (3, 2), reason="no backport")
+    @unittest.skipIf(sys.version_info[:2] >= (3, 2), reason="it exists")
     def test_resourcewarning_missing(self):
         """Test that :class:`ResourceWarning` does not exist."""
 
@@ -21,7 +21,7 @@ class TestPyLegacyBuiltins(unittest.TestCase):
 
         self.assertRaises(NameError, test_callable)
 
-    def test_resourcewarning_available(self):
+    def test_pylegacy_resourcewarning_available(self):
         """Test that :class:`ResourceWarning` exists with :mod:`pylegacy`."""
 
         import warnings

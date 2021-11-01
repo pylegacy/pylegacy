@@ -30,8 +30,8 @@ class TestPyLegacyExceptions(unittest.TestCase):
             self.assertRaises(ImportError, test_callable1)
             self.assertRaises(ImportError, test_callable2)
 
-    @unittest.skipIf(sys.version_info[:1] >= (3,), reason="no backport")
-    def test_resourcewarning_available(self):
+    @unittest.skipIf(sys.version_info[:1] >= (3,), reason="it exists")
+    def test_pylegacy_resourcewarning_available(self):
         """Test that :class:`ResourceWarning` exists with :mod:`pylegacy`."""
 
         import warnings
