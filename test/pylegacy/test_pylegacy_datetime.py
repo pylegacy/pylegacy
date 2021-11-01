@@ -300,6 +300,46 @@ class TestPyLegacyDatetime(unittest.TestCase):
         result = "datetime.timezone({0})".format(repr(offset))
         self.assertEqual(repr(tz), result)
 
+    def test_pylegacy_timezone_pickling_giving_name(self):
+        """Test pickling :class:`pylegacy.datetime.timezone` objects."""
+
+        import pickle
+        from pylegacy import datetime as dt
+        from pylegacy.tempfile import NamedTemporaryFile
+
+        offset = dt.timedelta(hours=2)
+        tz = dt.timezone(offset, name="Athens time")
+
+        with NamedTemporaryFile(suffix=".pkl") as tmpfile:
+            # Save to file.
+            with open(tmpfile.name, "wb") as tmpfd:
+                pickle.dump(tz, tmpfd)
+            # Read file again.
+            with open(tmpfile.name, "rb") as tmpfd:
+                tzread = pickle.load(tmpfd)
+
+        self.assertEqual(tzread, tz)
+
+    def test_pylegacy_timezone_pickling_not_giving_name(self):
+        """Test pickling :class:`pylegacy.datetime.timezone` objects."""
+
+        import pickle
+        from pylegacy import datetime as dt
+        from pylegacy.tempfile import NamedTemporaryFile
+
+        offset = dt.timedelta(hours=2)
+        tz = dt.timezone(offset)
+
+        with NamedTemporaryFile(suffix=".pkl") as tmpfile:
+            # Save to file.
+            with open(tmpfile.name, "wb") as tmpfd:
+                pickle.dump(tz, tmpfd)
+            # Read file again.
+            with open(tmpfile.name, "rb") as tmpfd:
+                tzread = pickle.load(tmpfd)
+
+        self.assertEqual(tzread, tz)
+
 
 if __name__ == "__main__":
     unittest.main()
