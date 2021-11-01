@@ -37,7 +37,8 @@ if __sys.version_info[:2] < (3, 2):
                 return
             raise
 
-    __all__.append("makedirs")
+    if "makedirs" not in __all__:
+        __all__.append("makedirs")
 
 # Remove temporary imports.
 del __sys

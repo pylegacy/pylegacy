@@ -22,7 +22,8 @@ if __sys.version_info[:2] < (3, 2):
     class ResourceWarning(Warning):
         """Base class for warnings about resource usage."""
 
-    __all__.append("ResourceWarning")
+    if "ResourceWarning" not in __all__:
+        __all__.append("ResourceWarning")
 
 # Remove temporary imports.
 del __sys

@@ -60,7 +60,8 @@ if __sys.version_info[:2] < (3, 4):
             if self._finalizer.detach():
                 _shutil.rmtree(self.name)
 
-    __all__.append("TemporaryDirectory")
+    if "TemporaryDirectory" not in __all__:
+        __all__.append("TemporaryDirectory")
 
 # Remove temporary imports.
 del __sys

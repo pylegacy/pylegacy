@@ -158,7 +158,8 @@ if __sys.version_info[:2] < (3, 4):
                 if reenable_gc:
                     gc.enable()
 
-    __all__.append("finalize")
+    if "finalize" not in __all__:
+        __all__.append("finalize")
 
 # Remove temporary imports.
 del __sys
