@@ -61,16 +61,19 @@ confidence=
 # no Warning level messages displayed, use "--disable=all --enable=classes
 # --disable=W".
 disable=
-    # Assign to returned None.
-    assignment-from-no-return,
-    assignment-from-none,
     # Allow freedom with imports.
     import-outside-toplevel,
-    wildcard-import,
+    ungrouped-imports,
     unused-wildcard-import,
+    wildcard-import,
     # Allow freedom with redefinitions.
     redefined-builtin,
     function-redefined,
+    # Allow inheriting from object.
+    useless-object-inheritance,
+    # Allow assigning to returned None.
+    assignment-from-no-return,
+    assignment-from-none,
     # Allow freedom with error raises.
     raise-missing-from
 
@@ -467,7 +470,7 @@ max-returns=6
 max-statements=90
 
 # Minimum number of public methods for a class (see R0903).
-min-public-methods=1
+min-public-methods=0
 
 
 [IMPORTS]
