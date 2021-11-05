@@ -152,3 +152,50 @@ jobs:
           . /etc/profile
           pkg=$(find src -mindepth 1 -maxdepth 1 -type d | head -n1 | xargs basename)
           python -m pytest --cov="${pkg}"
+
+  upload:
+    if: startsWith(github.event.ref, 'refs/tags/v')
+    needs: test
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python_version:
+          [
+            "3.6",
+          ]
+      max-parallel: 1
+    container: "tinybases/python:${{ matrix.python_version }}-debian-5"
+    environment: PyPI
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v1
+      -
+        name: Download artifacts
+        uses: actions/download-artifact@v1
+        with:
+          name: artifacts-${{ matrix.python_version }}
+          path: dist
+      -
+        name: Print environment
+        run: |
+          set -e
+          . /etc/profile
+          python -V
+      -
+        name: Install requirements
+        run: |
+          set -e
+          . /etc/profile
+          pip install --prefer-binary twine
+      -
+        name: Upload distributables
+        env:
+          TWINE_USERNAME: __token__
+          TWINE_PASSWORD: "${{ secrets.PYPI_TOKEN }}"
+          TWINE_REPOSITORY_URL: "${{ secrets.PYPI_REPOSITORY_URL }}"
+        run: |
+          set -e
+          . /etc/profile
+          python -m twine check dist/*
+          python -m twine upload dist/*
