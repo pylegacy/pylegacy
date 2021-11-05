@@ -89,7 +89,7 @@ jobs:
         run: |
           set -e
           . /etc/profile
-          python setup.py bdist_wheel --universal
+          python setup.py sdist bdist_wheel --universal
       -
         name: Upload artifacts
         uses: actions/upload-artifact@v1
