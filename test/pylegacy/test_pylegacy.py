@@ -15,9 +15,10 @@ class TestPyLegacy(unittest.TestCase):
 
         import pylegacy
 
+        regex = r"^(\d\.\d\.\d)(([abc]|rc)\d+)?(\+dev)?$"
         version = pylegacy.__version__
         self.assertTrue(isinstance(version, str))
-        self.assertTrue(re.match(r"^(\d\.\d\.\d)(\+dev)?$", version))
+        self.assertTrue(re.match(regex, version))
 
 
 if __name__ == "__main__":
