@@ -10,6 +10,12 @@ class TestPyLegacyOs(unittest.TestCase):
     def setUp(self):
         """Define the test scope variables."""
 
+    def test_os_environ_available(self):
+        """Test that :func:`os.environ` is accessible."""
+
+        from pylegacy import os
+        self.assertTrue(hasattr(os, "environ"))
+
     @unittest.skipIf(sys.version_info[:2] >= (3, 2), reason="it has exist_ok")
     def test_os_makedirs_error_args(self):
         """Test that :func:`os.makedirs` does not have `exist_ok` arg."""
