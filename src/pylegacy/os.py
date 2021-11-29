@@ -40,5 +40,15 @@ if __sys.version_info[:2] < (3, 2):
     if "makedirs" not in __all__:
         __all__.append("makedirs")
 
+if (3, 3) <= __sys.version_info[:2] < (3, 5):
+
+    # Backport info:
+    # - Python 3.3: first time that `os.environ` was removed from `__all__`.
+    # - Python 3.5: `os.environ` is brought back to `__all__`.
+    # pylint: disable=redefined-outer-name
+    from os import environ
+    __all__.append("environ")
+
+
 # Remove temporary imports.
 del __sys
