@@ -1,4 +1,4 @@
-name: ci
+name: pylegacy
 
 on:
   push:
@@ -24,34 +24,23 @@ jobs:
             "3.9",
           ]
       max-parallel: 6
+      fail-fast: false
     container: "pylegacy/python:${{ matrix.python_version }}-debian-5"
     steps:
       -
         name: Checkout
         uses: actions/checkout@v1
       -
-        name: Print environment
-        run: |
-          set -e
-          . /etc/profile
-          python -V
-      -
         name: Install dev requirements
         run: |
-          set -e
-          . /etc/profile
           pip install -r requirements-dev.txt
       -
         name: Run Flake8
         run: |
-          set -e
-          . /etc/profile
           if [ -x "$(command -v flake8)" ]; then flake8; fi
       -
         name: Run PyLint
         run: |
-          set -e
-          . /etc/profile
           if [ -x "$(command -v pylint)" ]; then pylint src test; fi
 
   build:
@@ -73,22 +62,15 @@ jobs:
             "3.9",
           ]
       max-parallel: 6
+      fail-fast: false
     container: "pylegacy/python:${{ matrix.python_version }}-debian-5"
     steps:
       -
         name: Checkout
         uses: actions/checkout@v1
       -
-        name: Print environment
-        run: |
-          set -e
-          . /etc/profile
-          python -V
-      -
         name: Build wheel
         run: |
-          set -e
-          . /etc/profile
           python setup.py sdist bdist_wheel --universal
       -
         name: Upload artifacts
@@ -116,6 +98,7 @@ jobs:
             "3.9",
           ]
       max-parallel: 6
+      fail-fast: false
     container: "pylegacy/python:${{ matrix.python_version }}-debian-5"
     steps:
       -
@@ -128,28 +111,16 @@ jobs:
           name: artifacts-${{ matrix.python_version }}
           path: dist
       -
-        name: Print environment
-        run: |
-          set -e
-          . /etc/profile
-          python -V
-      -
         name: Install dev requirements
         run: |
-          set -e
-          . /etc/profile
           pip install -r requirements-dev.txt
       -
         name: Install package
         run: |
-          set -e
-          . /etc/profile
           pip install dist/*.whl
       -
         name: Test package
         run: |
-          set -e
-          . /etc/profile
           pkg=$(find src -mindepth 1 -maxdepth 1 -type d | head -n1 | xargs basename)
           python -m pytest --cov="${pkg}"
 
@@ -177,16 +148,8 @@ jobs:
           name: artifacts-${{ matrix.python_version }}
           path: dist
       -
-        name: Print environment
-        run: |
-          set -e
-          . /etc/profile
-          python -V
-      -
         name: Install requirements
         run: |
-          set -e
-          . /etc/profile
           pip install --prefer-binary twine
       -
         name: Upload distributables
@@ -195,7 +158,5 @@ jobs:
           TWINE_PASSWORD: "${{ secrets.PYPI_TOKEN }}"
           TWINE_REPOSITORY_URL: "${{ secrets.PYPI_REPOSITORY_URL }}"
         run: |
-          set -e
-          . /etc/profile
           python -m twine check dist/*
           python -m twine upload dist/*
