@@ -13,6 +13,26 @@ class TestPyLegacyBuiltins(unittest.TestCase):
     def setUp(self):
         """Define the test scope variables."""
 
+    @unittest.skipIf(sys.version_info[:2] < (3, 0), reason="it exists")
+    @unittest.skipIf(sys.version_info[:2] >= (3, 2), reason="it exists")
+    def test_callable_missing(self):
+        """Test that :class:`callable` does not exist."""
+
+        def test_callable():
+            """Helper function."""
+            # pylint: disable=undefined-variable
+            return callable  # noqa: F821
+
+        self.assertRaises(NameError, test_callable)
+
+    def test_pylegacy_callable_available(self):
+        """Test that :class:`pylegacy.builtins.callable` is available."""
+
+        from pylegacy.builtins import callable
+
+        self.assertTrue(callable(int))
+        self.assertFalse(callable(1))
+
     @unittest.skipIf(sys.version_info[:2] >= (3, 2), reason="it exists")
     def test_resourcewarning_missing(self):
         """Test that :class:`ResourceWarning` does not exist."""
