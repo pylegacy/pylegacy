@@ -1,7 +1,10 @@
 """Import test for :mod:`pylegacy`."""
 
 import re
-import unittest2 as unittest
+try:
+    import unittest2 as unittest
+except ImportError:
+    import unittest
 
 
 class TestPyLegacy(unittest.TestCase):

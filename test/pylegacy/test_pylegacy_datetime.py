@@ -1,7 +1,10 @@
 """Tests for :mod:`pylegacy.datetime`."""
 
 import sys
-import unittest2 as unittest
+try:
+    import unittest2 as unittest
+except ImportError:
+    import unittest
 
 
 # pylint: disable=too-many-public-methods

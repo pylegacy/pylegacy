@@ -1,7 +1,10 @@
 """Tests for :mod:`pylegacy.tempfile`."""
 
 import sys
-import unittest2 as unittest
+try:
+    import unittest2 as unittest
+except ImportError:
+    import unittest
 
 
 class TestPyLegacyTempfile(unittest.TestCase):
