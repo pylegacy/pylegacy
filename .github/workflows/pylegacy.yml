@@ -11,18 +11,8 @@ jobs:
     strategy:
       matrix:
         python_version:
-          [
-            "2.6",
-            "2.7",
-            "3.2",
-            "3.3",
-            "3.4",
-            "3.5",
-            "3.6",
-            "3.7",
-            "3.8",
-            "3.9",
-          ]
+          ["2.6", "2.7", "3.2", "3.3", "3.4", "3.5", "3.6", "3.7", "3.8",
+           "3.9", "3.10"]
       max-parallel: 6
       fail-fast: false
     container: "pylegacy/python:${{ matrix.python_version }}-debian-5"
@@ -49,18 +39,8 @@ jobs:
     strategy:
       matrix:
         python_version:
-          [
-            "2.6",
-            "2.7",
-            "3.2",
-            "3.3",
-            "3.4",
-            "3.5",
-            "3.6",
-            "3.7",
-            "3.8",
-            "3.9",
-          ]
+          ["2.6", "2.7", "3.2", "3.3", "3.4", "3.5", "3.6", "3.7", "3.8",
+           "3.9", "3.10"]
       max-parallel: 6
       fail-fast: false
     container: "pylegacy/python:${{ matrix.python_version }}-debian-5"
@@ -85,18 +65,8 @@ jobs:
     strategy:
       matrix:
         python_version:
-          [
-            "2.6",
-            "2.7",
-            "3.2",
-            "3.3",
-            "3.4",
-            "3.5",
-            "3.6",
-            "3.7",
-            "3.8",
-            "3.9",
-          ]
+          ["2.6", "2.7", "3.2", "3.3", "3.4", "3.5", "3.6", "3.7", "3.8",
+           "3.9", "3.10"]
       max-parallel: 6
       fail-fast: false
     container: "pylegacy/python:${{ matrix.python_version }}-debian-5"
@@ -131,9 +101,7 @@ jobs:
     strategy:
       matrix:
         python_version:
-          [
-            "3.6",
-          ]
+          ["3.6"]
       max-parallel: 1
     container: "pylegacy/python:${{ matrix.python_version }}-debian-5"
     environment: PyPI
