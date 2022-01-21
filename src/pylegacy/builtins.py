@@ -25,5 +25,17 @@ if __sys.version_info[:2] < (3, 2):
     if "ResourceWarning" not in __all__:
         __all__.append("ResourceWarning")
 
+if (3, 0) <= __sys.version_info[:2] < (3, 2):
+
+    # Backport info:
+    # - Python 3.0 and 3.1: removed from builtins.
+    def callable(obj):
+        """Return whether the object is callable (i.e., some kind of function).
+
+        Note that classes are callable, as are instances of classes with a
+        __call__() method."""
+
+        return hasattr(obj, "__call__")
+
 # Remove temporary imports.
 del __sys
