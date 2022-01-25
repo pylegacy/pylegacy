@@ -45,7 +45,7 @@ class TestPyLegacyTempfile(unittest.TestCase):
         from pylegacy.builtins import ResourceWarning
         from pylegacy.tempfile import TemporaryDirectory
 
-        tmpdir = TemporaryDirectory()
+        tmpdir = TemporaryDirectory()  # pylint: disable=refactoring
         self.assertTrue(isinstance(tmpdir, TemporaryDirectory))
         self.assertTrue(os.path.exists(tmpdir.name))
         self.assertTrue(os.path.isdir(tmpdir.name))

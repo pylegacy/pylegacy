@@ -7,6 +7,7 @@ import sys as __sys
 # Start with backports.
 if __sys.version_info[:1] < (3,):
 
+    # pylint: disable=import-error
     from exceptions import *
     from exceptions import __doc__
 
