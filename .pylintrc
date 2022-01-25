@@ -75,7 +75,9 @@ disable=
     assignment-from-no-return,
     assignment-from-none,
     # Allow freedom with error raises.
-    raise-missing-from
+    raise-missing-from,
+    # Allow freedom with string formatting.
+    consider-using-f-string
 
 # Enable the message, report, category or checker with the given id(s). You can
 # either give multiple identifier separated by comma (,) or put this option
