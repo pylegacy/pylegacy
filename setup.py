@@ -78,10 +78,12 @@ setup(**{
             "<4",
         ]),
     "extras_require": {
-        "dev":
-            get_content("requirements-dev.txt", splitlines=True),
         "doc":
             get_content("requirements-doc.txt", splitlines=True),
+        "lint":
+            get_content("requirements-lint.txt", splitlines=True),
+        "test":
+            get_content("requirements-test.txt", splitlines=True),
     },
     "project_urls": {
         "Bug Tracker":
