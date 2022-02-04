@@ -1,4 +1,3 @@
-include CHANGELOG.md
 include .pylintrc
 include requirements*.txt
 recursive-include test *
