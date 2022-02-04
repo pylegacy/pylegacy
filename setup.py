@@ -78,8 +78,6 @@ setup(**{
             "<4",
         ]),
     "extras_require": {
-        "doc":
-            get_content("requirements-doc.txt", splitlines=True),
         "lint":
             get_content("requirements-lint.txt", splitlines=True),
         "test":
