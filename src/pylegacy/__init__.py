@@ -1,3 +1,3 @@
 """pylegacy -- Backports for abandoned Python versions."""
 
-__version__ = "0.1.0a3+dev"
+__version__ = "0.1.0a4"
