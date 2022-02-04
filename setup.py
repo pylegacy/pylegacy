@@ -8,6 +8,7 @@ import os
 import re
 from setuptools import setup
 from setuptools import find_packages
+from setuptools.command.sdist import sdist
 
 
 def get_content(name, splitlines=False):
@@ -30,6 +31,19 @@ def get_version(pkgname):
     with io.open(path, encoding="utf-8") as fd:
         pattern = r"""\n__version__[ ]*=[ ]*["']([^"]+)["']"""
         return re.search(pattern, fd.read()).group(1)
+
+
+class sdist_zip(sdist):
+    """Custom `sdist` that saves source distributions in zip format."""
+
+    def initialize_options(self):
+        """Call `initialize_options` and then set zip as default format."""
+
+        sdist.initialize_options(self)
+        self._default_to_zip()
+
+    def _default_to_zip(self):
+        self.formats = ["zip"]
 
 
 setup(**{
@@ -81,6 +95,9 @@ setup(**{
         {"": "src"},
     "packages":
         find_packages(where="src"),
+    "cmdclass": {
+        "sdist": sdist_zip,
+    },
     "python_requires":
         ", ".join([
             ">=2.6",
