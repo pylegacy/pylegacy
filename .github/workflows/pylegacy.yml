@@ -2,6 +2,7 @@ name: pylegacy
 
 on:
   push:
+  pull_request:
   workflow_dispatch:
 
 jobs:
@@ -10,12 +11,12 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python_version:
+        python-version:
           ["2.6", "2.7", "3.2", "3.3", "3.4", "3.5", "3.6", "3.7", "3.8",
            "3.9", "3.10"]
       max-parallel: 6
       fail-fast: false
-    container: "pylegacy/python:${{ matrix.python_version }}-debian-5"
+    container: "pylegacy/python:${{ matrix.python-version }}-debian-5"
     steps:
       -
         name: Checkout
@@ -38,12 +39,12 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python_version:
+        python-version:
           ["2.6", "2.7", "3.2", "3.3", "3.4", "3.5", "3.6", "3.7", "3.8",
            "3.9", "3.10"]
       max-parallel: 6
       fail-fast: false
-    container: "pylegacy/python:${{ matrix.python_version }}-debian-5"
+    container: "pylegacy/python:${{ matrix.python-version }}-debian-5"
     steps:
       -
         name: Checkout
@@ -53,10 +54,10 @@ jobs:
         run: |
           python setup.py sdist bdist_wheel
       -
-        name: Upload artifacts
+        name: Upload build artifacts
         uses: actions/upload-artifact@v1
         with:
-          name: artifacts-${{ matrix.python_version }}
+          name: artifacts-${{ matrix.python-version }}
           path: dist
 
   test:
@@ -64,21 +65,21 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python_version:
+        python-version:
           ["2.6", "2.7", "3.2", "3.3", "3.4", "3.5", "3.6", "3.7", "3.8",
            "3.9", "3.10"]
       max-parallel: 6
       fail-fast: false
-    container: "pylegacy/python:${{ matrix.python_version }}-debian-5"
+    container: "pylegacy/python:${{ matrix.python-version }}-debian-5"
     steps:
       -
         name: Checkout
         uses: actions/checkout@v1
       -
-        name: Download artifacts
+        name: Download build artifacts
         uses: actions/download-artifact@v1
         with:
-          name: artifacts-${{ matrix.python_version }}
+          name: artifacts-${{ matrix.python-version }}
           path: dist
       -
         name: Install test requirements
@@ -92,7 +93,9 @@ jobs:
         name: Test package
         run: |
           pkg=$(find src -mindepth 1 -maxdepth 1 -type d | head -n1 | xargs basename)
-          python -m pytest --cov="${pkg}"
+          python -m pytest                                                    \
+              --cov="${pkg}" --cov-report=html --cov-report=term              \
+              --ignore=dist --ignore=build
 
   upload:
     if: startsWith(github.event.ref, 'refs/tags/v')
@@ -100,20 +103,20 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python_version:
+        python-version:
           ["3.6"]
       max-parallel: 1
-    container: "pylegacy/python:${{ matrix.python_version }}-debian-5"
+    container: "pylegacy/python:${{ matrix.python-version }}-debian-5"
     environment: PyPI
     steps:
       -
         name: Checkout
         uses: actions/checkout@v1
       -
-        name: Download artifacts
+        name: Download build artifacts
         uses: actions/download-artifact@v1
         with:
-          name: artifacts-${{ matrix.python_version }}
+          name: artifacts-${{ matrix.python-version }}
           path: dist
       -
         name: Install requirements
@@ -127,4 +130,4 @@ jobs:
           TWINE_REPOSITORY_URL: "${{ secrets.PYPI_REPOSITORY_URL }}"
         run: |
           python -m twine check dist/*
-          python -m twine upload dist/*
+          python -m twine upload --skip-existing dist/*
