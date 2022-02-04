@@ -56,6 +56,7 @@ setup(**{
         "Environment :: Console",
         "Intended Audience :: Developers",
         "License :: OSI Approved :: Python Software Foundation License",
+        "Operating System :: OS Independent",
         "Programming Language :: Python :: 2",
         "Programming Language :: Python :: 2.6",
         "Programming Language :: Python :: 2.7",
