@@ -7,7 +7,6 @@ except ImportError:
     import unittest
 
 
-# pylint: disable=too-many-public-methods
 class TestPyLegacyDatetime(unittest.TestCase):
     """Unittest class for :mod:`pylegacy.datetime`."""
 

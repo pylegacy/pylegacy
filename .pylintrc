@@ -69,8 +69,9 @@ disable=
     # Allow freedom with redefinitions.
     redefined-builtin,
     function-redefined,
-    # Allow inheriting from object.
+    # Allow freedom with inheritance.
     useless-object-inheritance,
+    super-with-arguments,
     # Allow assigning to returned None.
     assignment-from-no-return,
     assignment-from-none,
@@ -182,7 +183,6 @@ function-naming-style=snake_case
 # Good variable names which should always be accepted, separated by a comma.
 good-names=i, j, k, m, n,
            db, fd, tz, ex, tb,
-           Run,
            _
 
 # Include a hint for the correct naming format with invalid-name.
@@ -463,7 +463,7 @@ max-locals=24
 max-parents=18
 
 # Maximum number of public methods for a class (see R0904).
-max-public-methods=24
+max-public-methods=90
 
 # Maximum number of return / yield for function / method body.
 max-returns=6
@@ -472,7 +472,7 @@ max-returns=6
 max-statements=90
 
 # Minimum number of public methods for a class (see R0903).
-min-public-methods=0
+min-public-methods=1
 
 
 [IMPORTS]

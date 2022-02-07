@@ -45,7 +45,7 @@ if __sys.version_info[:2] < (3, 4):
         _dirty = False
         _registered_with_atexit = False
 
-        class _Info(object):
+        class _Info(object):  # pylint: disable=too-few-public-methods
             __slots__ = ("weakref", "func", "args", "kwargs", "atexit", "index")
 
         def __init__(self, obj, func, *args, **kwargs):

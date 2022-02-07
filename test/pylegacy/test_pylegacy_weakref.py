@@ -15,7 +15,7 @@ class TestPyLegacyWeakref(unittest.TestCase):
 
         from pylegacy.weakref import ref
 
-        class Dummy(object):
+        class Dummy(object):  # pylint: disable=too-few-public-methods
             """Dummy class to test :mod:`pylegacy.weakref`."""
 
         self.obj = Dummy()
