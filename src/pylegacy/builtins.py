@@ -42,7 +42,8 @@ if (3, 0) <= __sys.version_info[:2]:
     # Backport info:
     # - Python 3: removed `basestring` type, useful for Python 2 compatibility.
     # pylint: disable=invalid-name
-    class basestring(type):
+    __type = type
+    class type(__type):
         """Temporary metaclass for the ported `basestring` type object."""
 
         def __instancecheck__(cls, instance):
@@ -54,14 +55,14 @@ if (3, 0) <= __sys.version_info[:2]:
             return issubclass(subclass, str)
 
         def __setattr__(cls, name, value):
-            msg = "can't set attributes of built-in/extension type 'basestring'"
-            raise TypeError(msg)
+            msg = "can't set attributes of built-in/extension type '{0}'"
+            raise TypeError(msg.format(cls.__name__))
 
         def mro(cls):
             """Return a type's method resolution order."""
             return [cls, object]
 
-    __metabasestring = basestring
+    __metabasestring, type = type, __type
     class basestring(object):
         """Type basestring cannot be instantiated; it is the base for str and unicode."""
 
@@ -78,13 +79,6 @@ if (3, 0) <= __sys.version_info[:2]:
                 raise TypeError(msg.format(basestring.__name__, cls.__name__))
             msg = "{0}.__new__({1}): {1} is not a subtype of {0}"
             raise TypeError(msg.format(basestring.__name__, cls.__name__))
-
-        def __setattr__(self, *args):
-            if len(args) != 2:
-                msg = " expected {0} arguments, got {1}"
-                raise TypeError(msg.format(2, len(args)))
-            msg = "can't apply this __setattr__ to type object"
-            raise TypeError(msg)
 
     basestring = __metabasestring(
         basestring.__name__,
