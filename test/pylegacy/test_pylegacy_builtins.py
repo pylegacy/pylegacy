@@ -53,6 +53,72 @@ class TestPyLegacyBuiltins(unittest.TestCase):
         with self.assertWarns(ResourceWarning):
             warnings.warn("this is a ResourceWarning message", ResourceWarning)
 
+    @unittest.skipIf(sys.version_info[:2] < (3, 0), reason="it exists")
+    def test_basestring_missing(self):
+        """Test that :class:`basestring` does not exist."""
+
+        def test_callable():
+            """Helper function."""
+            # pylint: disable=undefined-variable
+            return basestring  # noqa: F821
+
+        self.assertRaises(NameError, test_callable)
+
+    def test_pylegacy_basestring_available(self):
+        """Test that :class:`basestring` exists with :mod:`pylegacy`."""
+
+        from pylegacy.builtins import basestring
+        self.assertTrue(basestring)
+
+    def test_pylegacy_basestring_error_instance_creation(self):
+        """Test that :class:`basestring` exists with :mod:`pylegacy`."""
+
+        from pylegacy.builtins import basestring
+        self.assertRaises(TypeError, basestring, "hello")
+
+    def test_pylegacy_basestring_contructor_error_unsafe_creation(self):
+        """Test :class:`basestring` constructor error if called directly."""
+
+        from pylegacy.builtins import basestring
+
+        self.assertRaises(TypeError, basestring.__new__, str, "hello")
+
+    def test_pylegacy_basestring_contructor_error_invalid_object(self):
+        """Test :class:`basestring` constructor error with invalid object."""
+
+        from pylegacy.builtins import basestring
+        self.assertRaises(TypeError, basestring.__new__, 1)
+
+    def test_pylegacy_basestring_contructor_error_invalid_type(self):
+        """Test :class:`basestring` constructor error with invalid type."""
+
+        from pylegacy.builtins import basestring
+        self.assertRaises(TypeError, basestring.__new__, int, 1)
+
+    def test_pylegacy_basestring_setattr_error(self):
+        """Test :class:`basestring` error if trying to set attributes"""
+
+        from pylegacy.builtins import basestring
+
+        def test_callable():
+            """Helper function."""
+            basestring.x = 1
+
+        self.assertRaises(TypeError, test_callable)
+
+    def test_pylegacy_basestring_isinstance_true(self):
+        """Assert that Python 3 strings are recognised as basestrings."""
+
+        from pylegacy.builtins import basestring
+        self.assertIsInstance("hello", basestring)
+
+    def test_pylegacy_basestring_isinstance_false(self):
+        """Assert that bytes are recognised as basestrings only in Python 2."""
+
+        from pylegacy.builtins import basestring
+        result = (sys.version_info[0] < 3)
+        self.assertTrue(isinstance(b"hello", basestring) is result)
+
 
 if __name__ == "__main__":
     unittest.main()
