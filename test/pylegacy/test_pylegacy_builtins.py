@@ -119,6 +119,19 @@ class TestPyLegacyBuiltins(unittest.TestCase):
         result = (sys.version_info[0] < 3)
         self.assertTrue(isinstance(b"hello", basestring) is result)
 
+    def test_pylegacy_basestring_issubclass_true(self):
+        """Assert that `str` is a subclass of `basestring`."""
+
+        from pylegacy.builtins import basestring
+        self.assertTrue(issubclass(str, basestring))
+
+    def test_pylegacy_basestring_issubclass_false(self):
+        """Assert that `bytes` is a subclass of `basestring` only in Python 2."""
+
+        from pylegacy.builtins import basestring
+        result = (sys.version_info[0] < 3)
+        self.assertTrue(issubclass(bytes, basestring) is result)
+
 
 if __name__ == "__main__":
     unittest.main()
