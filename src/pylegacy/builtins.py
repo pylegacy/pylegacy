@@ -37,5 +37,60 @@ if (3, 0) <= __sys.version_info[:2] < (3, 2):
 
         return hasattr(obj, "__call__")
 
+if (3, 0) <= __sys.version_info[:2]:
+
+    # Backport info:
+    # - Python 3: removed `basestring` type, useful for Python 2 compatibility.
+    # pylint: disable=invalid-name
+    class basestring(type):
+        """Temporary metaclass for the ported `basestring` type object."""
+
+        def __instancecheck__(cls, instance):
+            """check if an object is an instance"""
+            return isinstance(instance, str)
+
+        def __subclasscheck__(cls, subclass):
+            """check if a class is a subclass"""
+            return issubclass(subclass, str)
+
+        def __setattr__(cls, name, value):
+            msg = "can't set attributes of built-in/extension type 'basestring'"
+            raise TypeError(msg)
+
+        def mro(cls):
+            """Return a type's method resolution order."""
+            return [cls, object]
+
+    __metabasestring = basestring
+    class basestring(object):
+        """Type basestring cannot be instantiated; it is the base for str and unicode."""
+
+        def __new__(cls, *args, **kwargs):
+            del args, kwargs
+            if not isinstance(cls, type):
+                msg = "{0}.__new__(X): X is not a type object ({1})"
+                raise TypeError(msg.format(basestring.__name__, type(cls).__name__))
+            if cls == basestring:
+                msg = "The basestring type cannot be instantiated"
+                raise TypeError(msg)
+            if issubclass(cls, str):
+                msg = "{0}.__new__({1}) is not safe, use {1}.__new__()"
+                raise TypeError(msg.format(basestring.__name__, cls.__name__))
+            msg = "{0}.__new__({1}): {1} is not a subtype of {0}"
+            raise TypeError(msg.format(basestring.__name__, cls.__name__))
+
+        def __setattr__(self, *args):
+            if len(args) != 2:
+                msg = " expected {0} arguments, got {1}"
+                raise TypeError(msg.format(2, len(args)))
+            msg = "can't apply this __setattr__ to type object"
+            raise TypeError(msg)
+
+    basestring = __metabasestring(
+        basestring.__name__,
+        basestring.__bases__,
+        vars(basestring).copy())
+    del __metabasestring
+
 # Remove temporary imports.
 del __sys
