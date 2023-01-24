@@ -15,6 +15,9 @@ https://semver.org/spec/v2.0.0.html
 ### Changed
 - Update upper pin for `flake8` to 5.1 in lint requirements.
 
+### Fixed
+- Fix setup metadata to allow support for Python 3.11.
+
 ## [0.1.0] - 2022-05-10
 
 ### Added
