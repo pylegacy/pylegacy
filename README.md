@@ -31,7 +31,7 @@ os.makedirs("example_folder", exist_ok=True)
 The `pylegacy` package is released under the [MIT] license (see the
 [`LICENSE`] file):
 ```
-Copyright (c) 2021-2022 Víctor Molina García
+Copyright (c) 2021-2023 Víctor Molina García
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
