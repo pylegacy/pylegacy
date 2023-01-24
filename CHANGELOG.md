@@ -10,7 +10,7 @@ https://keepachangelog.com/en/1.0.0/
 https://semver.org/spec/v2.0.0.html
 
 
-## [Unreleased]
+## [0.1.1] - 2023-01-24
 
 ### Changed
 - Update upper pin for `flake8` to 5.1 in lint requirements.
@@ -32,6 +32,8 @@ https://semver.org/spec/v2.0.0.html
 
 
 [Unreleased]:
-https://github.com/pylegacy/pylegacy/compare/master...develop
+https://github.com/pylegacy/pylegacy/compare/v0.1.1...develop
+[0.1.1]:
+https://github.com/pylegacy/pylegacy/compare/v0.1.0...v0.1.1
 [0.1.0]:
 https://github.com/pylegacy/pylegacy/tree/v0.1.0
