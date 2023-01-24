@@ -70,6 +70,7 @@ setup(**{
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
         "Topic :: Software Development :: Libraries :: Python Modules",
     ],
     "keywords": [
@@ -86,7 +87,7 @@ setup(**{
             ">=2.6",
             "!=3.0.*",
             "!=3.1.*",
-            "<3.11",
+            "<3.12",
         ]),
     "extras_require": {
         "lint":

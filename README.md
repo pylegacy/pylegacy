@@ -31,7 +31,7 @@ os.makedirs("example_folder", exist_ok=True)
 The `pylegacy` package is released under the [MIT] license (see the
 [`LICENSE`] file):
 ```
-Copyright (c) 2021-2022 Víctor Molina García
+Copyright (c) 2021-2023 Víctor Molina García
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -63,6 +63,6 @@ https://spdx.org/licenses/MIT.html
 [PSF-2.0]:
 https://spdx.org/licenses/PSF-2.0.html
 [`LICENSE`]:
-https://github.com/pylegacy/pylegacy/blob/v0.1.0/LICENSE
+https://github.com/pylegacy/pylegacy/blob/v0.1.1/LICENSE
 [`LICENSE.PSF-2.0`]:
-https://github.com/pylegacy/pylegacy/blob/v0.1.0/LICENSE.PSF-2.0
+https://github.com/pylegacy/pylegacy/blob/v0.1.1/LICENSE.PSF-2.0
