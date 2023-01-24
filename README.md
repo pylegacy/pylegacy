@@ -63,6 +63,6 @@ https://spdx.org/licenses/MIT.html
 [PSF-2.0]:
 https://spdx.org/licenses/PSF-2.0.html
 [`LICENSE`]:
-https://github.com/pylegacy/pylegacy/blob/v0.1.0/LICENSE
+https://github.com/pylegacy/pylegacy/blob/v0.1.1/LICENSE
 [`LICENSE.PSF-2.0`]:
-https://github.com/pylegacy/pylegacy/blob/v0.1.0/LICENSE.PSF-2.0
+https://github.com/pylegacy/pylegacy/blob/v0.1.1/LICENSE.PSF-2.0
