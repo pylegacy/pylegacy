@@ -28,7 +28,7 @@ jobs:
     steps:
       -
         name: Checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v3
       -
         name: Install lint requirements
         run: |
@@ -56,14 +56,14 @@ jobs:
     steps:
       -
         name: Checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v3
       -
         name: Build wheel
         run: |
           python setup.py sdist bdist_wheel
       -
         name: Upload build artifacts
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v3
         with:
           name: build-${{ matrix.python-version }}
           path: dist
@@ -82,10 +82,10 @@ jobs:
     steps:
       -
         name: Checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v3
       -
         name: Download build artifacts
-        uses: actions/download-artifact@v1
+        uses: actions/download-artifact@v3
         with:
           name: build-${{ matrix.python-version }}
           path: dist
@@ -107,7 +107,7 @@ jobs:
               --ignore=dist --ignore=build
       -
         name: Upload test artifacts
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v3
         with:
           name: test
           path: ./.coverage.${{ matrix.python-version }}
@@ -124,10 +124,10 @@ jobs:
     steps:
       -
         name: Checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v3
       -
         name: Download test artifacts
-        uses: actions/download-artifact@v1
+        uses: actions/download-artifact@v3
         with:
           name: test
           path: ./
@@ -143,7 +143,7 @@ jobs:
           coverage report
       -
         name: Upload coverage artifacts
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v3
         with:
           name: coverage
           path: htmlcov
@@ -162,7 +162,7 @@ jobs:
     steps:
       -
         name: Download build artifacts
-        uses: actions/download-artifact@v1
+        uses: actions/download-artifact@v3
         with:
           name: build-${{ matrix.python-version }}
           path: dist
