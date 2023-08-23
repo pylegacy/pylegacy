@@ -151,7 +151,6 @@ jobs:
           path: htmlcov
 
   upload:
-    if: startsWith(github.event.ref, 'refs/tags/v')
     needs: test
     runs-on: ubuntu-latest
     container: "pylegacy/python:3.8-debian-9"
@@ -177,5 +176,6 @@ jobs:
           TWINE_USERNAME: __token__
           TWINE_PASSWORD: "${{ secrets.PYPI_TOKEN }}"
           TWINE_REPOSITORY_URL: "${{ secrets.PYPI_REPOSITORY_URL }}"
+        if: startsWith(github.event.ref, 'refs/tags/v')
         run: |
           python -m twine upload --skip-existing dist/*
