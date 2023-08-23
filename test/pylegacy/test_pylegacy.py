@@ -18,7 +18,10 @@ class TestPyLegacy(unittest.TestCase):
 
         import pylegacy
 
-        regex = r"^(\d\.\d\.\d)(([abc]|rc)\d+)?(\+dev)?$"
+        num = r"(?:0|[1-9]\d*)"
+        build = r"(?:(?:[abc]|dev|rc)\d*)"
+        regex = r"^({0}\.{0}\.{0})(?:[+-]?({1}))?$".format(num, build)
+
         version = pylegacy.__version__
         self.assertTrue(isinstance(version, str))
         self.assertTrue(re.match(regex, version))
