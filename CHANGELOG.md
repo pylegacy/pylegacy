@@ -12,6 +12,10 @@ https://semver.org/spec/v2.0.0.html
 
 ## [Unreleased]
 
+### Changed
+- Update upper limit for `flake8` lint dependency to 7.1.
+- Restrict `pylint` dependency limits for Python 3.6.
+
 ## [0.1.1] - 2023-01-24
 
 ### Changed
