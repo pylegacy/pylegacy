@@ -60,7 +60,14 @@ jobs:
       -
         name: Build wheel
         run: |
-          python setup.py sdist bdist_wheel
+          if [ "${{ matrix.python-version }}" = "3.11" ]; then
+              kwds="--no-build-isolation"
+          fi
+          python setup.py sdist
+          case "${{ matrix.python-version }}" in
+              3.2)  python setup.py bdist_wheel ;;
+              *)    pip wheel -w dist --no-deps ${kwds} dist/*.zip ;;
+          esac
       -
         name: Upload build artifacts
         uses: actions/upload-artifact@v3
