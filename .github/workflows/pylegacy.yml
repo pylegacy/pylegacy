@@ -168,11 +168,14 @@ jobs:
         run: |
           pip install twine
       -
+        name: Check distributables
+        run: |
+          python -m twine check dist/*
+      -
         name: Upload distributables
         env:
           TWINE_USERNAME: __token__
           TWINE_PASSWORD: "${{ secrets.PYPI_TOKEN }}"
           TWINE_REPOSITORY_URL: "${{ secrets.PYPI_REPOSITORY_URL }}"
         run: |
-          python -m twine check dist/*
           python -m twine upload --skip-existing dist/*
