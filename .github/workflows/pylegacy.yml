@@ -115,12 +115,7 @@ jobs:
   coverage:
     needs: test
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version:
-          ["3.6"]
-      max-parallel: 1
-    container: "pylegacy/python:${{ matrix.python-version }}-debian-9"
+    container: "pylegacy/python:3.8-debian-9"
     steps:
       -
         name: Checkout
@@ -152,19 +147,14 @@ jobs:
     if: startsWith(github.event.ref, 'refs/tags/v')
     needs: test
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version:
-          ["3.6"]
-      max-parallel: 1
-    container: "pylegacy/python:${{ matrix.python-version }}-debian-9"
+    container: "pylegacy/python:3.8-debian-9"
     environment: PyPI
     steps:
       -
         name: Download build artifacts
         uses: actions/download-artifact@v3
         with:
-          name: build-${{ matrix.python-version }}
+          name: build-3.8
           path: dist
       -
         name: Install requirements
