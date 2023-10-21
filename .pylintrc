@@ -190,7 +190,7 @@ function-naming-style=snake_case
 
 # Good variable names which should always be accepted, separated by a comma.
 good-names=i, j, k, m, n,
-           db, fd, tz, ex, tb,
+           db, fd, fn, tz, ex, tb,
            _
 
 # Include a hint for the correct naming format with invalid-name.

@@ -16,7 +16,7 @@ if __sys.version_info[:2] < (3, 3):
 
     # Backport info:
     # - Python 3.3: first appeareance.
-    # pylint: disable=redefined-outer-name
+    # pylint: disable=redefined-outer-name,reimported
     def which(cmd, mode=__os.F_OK | __os.X_OK, path=None):
         """Given a command, mode, and a PATH string, return the path which
         conforms to the given mode on the PATH, or None if there is no such
@@ -53,7 +53,7 @@ if __sys.version_info[:2] < (3, 3):
 
         if sys.platform == "win32":
             # The current directory takes precedence on Windows.
-            if not os.curdir in path:
+            if os.curdir not in path:
                 path.insert(0, os.curdir)
 
             # PATHEXT is necessary to check on Windows.
@@ -74,7 +74,7 @@ if __sys.version_info[:2] < (3, 3):
         seen = set()
         for dir in path:
             normdir = os.path.normcase(dir)
-            if not normdir in seen:
+            if normdir not in seen:
                 seen.add(normdir)
                 for thefile in files:
                     name = os.path.join(dir, thefile)
