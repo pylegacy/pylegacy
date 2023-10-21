@@ -17,8 +17,9 @@ https://semver.org/spec/v2.0.0.html
   - 2.6 <= Python < 3.3: `shutil.which`.
 
 ### Changed
-- Update upper limit for `flake8` lint dependency to 7.1.
-- Restrict `pylint` dependency limits for Python 3.6.
+- Upgrade lint dependencies:
+  - Update upper limit for `flake8` to 6.2.
+  - Restrict `pylint` dependency limits for Python 3.6.
 
 ## [0.1.1] - 2023-01-24
 
