@@ -1,5 +1,13 @@
 name: pylegacy
 
+env:
+  PYTHONUNBUFFERED: "1"
+  PYTHONWARNINGS: "ignore:DEPRECATION"
+  PIP_DISABLE_PIP_VERSION_CHECK: 1
+  PIP_PREFER_BINARY: 1
+  PIP_RETRIES: 0
+  PIP_TIMEOUT: 10
+
 on:
   push:
   pull_request:
@@ -16,11 +24,11 @@ jobs:
            "3.9", "3.10", "3.11"]
       max-parallel: 6
       fail-fast: false
-    container: "pylegacy/python:${{ matrix.python-version }}-debian-5"
+    container: "pylegacy/python:${{ matrix.python-version }}-debian-9"
     steps:
       -
         name: Checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v3
       -
         name: Install lint requirements
         run: |
@@ -44,18 +52,25 @@ jobs:
            "3.9", "3.10", "3.11"]
       max-parallel: 6
       fail-fast: false
-    container: "pylegacy/python:${{ matrix.python-version }}-debian-5"
+    container: "pylegacy/python:${{ matrix.python-version }}-debian-9"
     steps:
       -
         name: Checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v3
       -
         name: Build wheel
         run: |
-          python setup.py sdist bdist_wheel
+          if [ "${{ matrix.python-version }}" = "3.11" ]; then
+              kwds="--no-build-isolation"
+          fi
+          python setup.py sdist
+          case "${{ matrix.python-version }}" in
+              3.2)  python setup.py bdist_wheel ;;
+              *)    pip wheel -w dist --no-deps ${kwds} dist/*.zip ;;
+          esac
       -
         name: Upload build artifacts
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v3
         with:
           name: build-${{ matrix.python-version }}
           path: dist
@@ -70,14 +85,14 @@ jobs:
            "3.9", "3.10", "3.11"]
       max-parallel: 6
       fail-fast: false
-    container: "pylegacy/python:${{ matrix.python-version }}-debian-5"
+    container: "pylegacy/python:${{ matrix.python-version }}-debian-9"
     steps:
       -
         name: Checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v3
       -
         name: Download build artifacts
-        uses: actions/download-artifact@v1
+        uses: actions/download-artifact@v3
         with:
           name: build-${{ matrix.python-version }}
           path: dist
@@ -99,7 +114,7 @@ jobs:
               --ignore=dist --ignore=build
       -
         name: Upload test artifacts
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v3
         with:
           name: test
           path: ./.coverage.${{ matrix.python-version }}
@@ -107,19 +122,14 @@ jobs:
   coverage:
     needs: test
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version:
-          ["3.6"]
-      max-parallel: 1
-    container: "pylegacy/python:${{ matrix.python-version }}-debian-5"
+    container: "pylegacy/python:3.8-debian-9"
     steps:
       -
         name: Checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v3
       -
         name: Download test artifacts
-        uses: actions/download-artifact@v1
+        uses: actions/download-artifact@v3
         with:
           name: test
           path: ./
@@ -135,33 +145,32 @@ jobs:
           coverage report
       -
         name: Upload coverage artifacts
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v3
         with:
           name: coverage
           path: htmlcov
 
   upload:
-    if: startsWith(github.event.ref, 'refs/tags/v')
     needs: test
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version:
-          ["3.6"]
-      max-parallel: 1
-    container: "pylegacy/python:${{ matrix.python-version }}-debian-5"
+    container: "pylegacy/python:3.8-debian-9"
     environment: PyPI
+    if: startsWith(github.event.ref, 'refs/tags/v')
     steps:
       -
         name: Download build artifacts
-        uses: actions/download-artifact@v1
+        uses: actions/download-artifact@v3
         with:
-          name: build-${{ matrix.python-version }}
+          name: build-2.7
           path: dist
       -
         name: Install requirements
         run: |
-          pip install --prefer-binary twine
+          pip install twine
+      -
+        name: Check distributables
+        run: |
+          python -m twine check dist/*
       -
         name: Upload distributables
         env:
@@ -169,5 +178,4 @@ jobs:
           TWINE_PASSWORD: "${{ secrets.PYPI_TOKEN }}"
           TWINE_REPOSITORY_URL: "${{ secrets.PYPI_REPOSITORY_URL }}"
         run: |
-          python -m twine check dist/*
           python -m twine upload --skip-existing dist/*

@@ -10,6 +10,17 @@ https://keepachangelog.com/en/1.0.0/
 https://semver.org/spec/v2.0.0.html
 
 
+## [0.2.0] - 2023-10-21
+
+### Added
+- Backport support for the following features:
+  - 2.6 <= Python < 3.3: `shutil.which`.
+
+### Changed
+- Upgrade lint dependencies:
+  - Update upper limit for `flake8` to 6.2.
+  - Restrict `pylint` dependency limits for Python 3.6.
+
 ## [0.1.1] - 2023-01-24
 
 ### Changed
@@ -32,7 +43,9 @@ https://semver.org/spec/v2.0.0.html
 
 
 [Unreleased]:
-https://github.com/pylegacy/pylegacy/compare/v0.1.1...develop
+https://github.com/pylegacy/pylegacy/compare/v0.2.0...develop
+[0.2.0]:
+https://github.com/pylegacy/pylegacy/compare/v0.1.1...v0.2.0
 [0.1.1]:
 https://github.com/pylegacy/pylegacy/compare/v0.1.0...v0.1.1
 [0.1.0]:
