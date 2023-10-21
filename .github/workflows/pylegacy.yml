@@ -155,12 +155,13 @@ jobs:
     runs-on: ubuntu-latest
     container: "pylegacy/python:3.8-debian-9"
     environment: PyPI
+    if: startsWith(github.event.ref, 'refs/tags/v')
     steps:
       -
         name: Download build artifacts
         uses: actions/download-artifact@v3
         with:
-          name: build-3.8
+          name: build-2.7
           path: dist
       -
         name: Install requirements
@@ -176,6 +177,5 @@ jobs:
           TWINE_USERNAME: __token__
           TWINE_PASSWORD: "${{ secrets.PYPI_TOKEN }}"
           TWINE_REPOSITORY_URL: "${{ secrets.PYPI_REPOSITORY_URL }}"
-        if: startsWith(github.event.ref, 'refs/tags/v')
         run: |
           python -m twine upload --skip-existing dist/*
