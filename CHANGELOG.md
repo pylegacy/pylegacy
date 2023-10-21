@@ -12,6 +12,10 @@ https://semver.org/spec/v2.0.0.html
 
 ## [Unreleased]
 
+### Added
+- Backport support for the following features:
+  - 2.6 <= Python < 3.3: `shutil.which`.
+
 ### Changed
 - Update upper limit for `flake8` lint dependency to 7.1.
 - Restrict `pylint` dependency limits for Python 3.6.
