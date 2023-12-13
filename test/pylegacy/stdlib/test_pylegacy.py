@@ -1,4 +1,4 @@
-"""Import test for :mod:`pylegacy`."""
+"""Import test for :mod:`pylegacy.stdlib`."""
 
 import re
 try:
@@ -8,7 +8,7 @@ except ImportError:
 
 
 class TestPyLegacy(unittest.TestCase):
-    """Unittest class for :mod:`pylegacy`."""
+    """Unittest class for :mod:`pylegacy.stdlib`."""
 
     def setUp(self):
         """Define the test scope variables."""
@@ -16,13 +16,13 @@ class TestPyLegacy(unittest.TestCase):
     def test_import(self):
         """Test that basic library import is working."""
 
-        import pylegacy
+        import pylegacy.stdlib
 
         num = r"(?:0|[1-9]\d*)"
         build = r"(?:(?:[abc]|dev|rc)\d*)"
         regex = r"^({0}\.{0}\.{0})(?:[+-]?({1}))?$".format(num, build)
 
-        version = pylegacy.__version__
+        version = pylegacy.stdlib.__version__
         self.assertTrue(isinstance(version, str))
         self.assertTrue(re.match(regex, version))
 

@@ -1,16 +1,16 @@
-"""Tests for :mod:`pylegacy.shutil`."""
+"""Tests for :mod:`pylegacy.stdlib.shutil`."""
 
 import sys
 try:
     import unittest2 as unittest
 except ImportError:
     import unittest
-from pylegacy import os
-from pylegacy.builtins import callable
+from pylegacy.stdlib import os
+from pylegacy.stdlib.builtins import callable
 
 
 class TestPyLegacyShutil(unittest.TestCase):
-    """Unittest class for :mod:`pylegacy.shutil`."""
+    """Unittest class for :mod:`pylegacy.stdlib.shutil`."""
 
     def setUp(self):
         """Define the test scope variables."""
@@ -28,19 +28,19 @@ class TestPyLegacyShutil(unittest.TestCase):
         self.assertRaises(ImportError, test_callable)
 
     def test_pylegacy_which_available(self):
-        """Test that :func:`pylegacy.shutil.which` is available."""
+        """Test that :func:`pylegacy.stdlib.shutil.which` is available."""
 
         def test_callable():
             """Helper function."""
-            from pylegacy.shutil import which
+            from pylegacy.stdlib.shutil import which
             return which
 
         self.assertTrue(callable(test_callable()))
 
     def test_pylegacy_which_python(self):
-        """Test :func:`pylegacy.shutil.which` with a valid executable."""
+        """Test :func:`pylegacy.stdlib.shutil.which` with a valid executable."""
 
-        from pylegacy.shutil import which
+        from pylegacy.stdlib.shutil import which
 
         result = which("python")
         expected = sys.executable
@@ -49,26 +49,26 @@ class TestPyLegacyShutil(unittest.TestCase):
                          expected if os.name != "nt" else expected.lower())
 
     def test_pylegacy_which_python_and_empty_path(self):
-        """Test :func:`pylegacy.shutil.which` with empty path."""
+        """Test :func:`pylegacy.stdlib.shutil.which` with empty path."""
 
-        from pylegacy.shutil import which
+        from pylegacy.stdlib.shutil import which
 
         result = which("python", path="")
         self.assertIs(result, None)
 
     def test_pylegacy_which_python_with_absolute_path(self):
-        """Test :func:`pylegacy.shutil.which` with absolute executable path."""
+        """Test :func:`pylegacy.stdlib.shutil.which` with absolute executable path."""
 
-        from pylegacy.shutil import which
+        from pylegacy.stdlib.shutil import which
 
         result = which(sys.executable)
         expected = sys.executable
         self.assertEqual(result, expected)
 
     def test_pylegacy_which_nonexisting_executable(self):
-        """Test :func:`pylegacy.shutil.which` with an invalid executable."""
+        """Test :func:`pylegacy.stdlib.shutil.which` with an invalid executable."""
 
-        from pylegacy.shutil import which
+        from pylegacy.stdlib.shutil import which
 
         result = which("a_non_existing_executable_anywhere")
         self.assertIs(result, None)

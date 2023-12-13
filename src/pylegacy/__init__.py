@@ -1,3 +1,2 @@
 """pylegacy -- Backports for abandoned Python versions."""
-
-__version__ = "0.3.0-dev"
+__path__ = __import__("pkgutil").extend_path(__path__, __name__)

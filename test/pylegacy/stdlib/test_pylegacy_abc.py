@@ -1,4 +1,4 @@
-"""Tests for :mod:`pylegacy.abc`."""
+"""Tests for :mod:`pylegacy.stdlib.abc`."""
 
 import sys
 try:
@@ -8,7 +8,7 @@ except ImportError:
 
 
 class TestPyLegacyAbc(unittest.TestCase):
-    """Unittest class for :mod:`pylegacy.abc`."""
+    """Unittest class for :mod:`pylegacy.stdlib.abc`."""
 
     def setUp(self):
         """Define the test scope variables."""
@@ -26,11 +26,11 @@ class TestPyLegacyAbc(unittest.TestCase):
         self.assertRaises(ImportError, test_callable)
 
     def test_pylegacy_abc_available(self):
-        """Test that :class:`pylegacy.abc.ABC` is available."""
+        """Test that :class:`pylegacy.stdlib.abc.ABC` is available."""
 
         def test_callable():
             """Helper function."""
-            from pylegacy.abc import ABC
+            from pylegacy.stdlib.abc import ABC
             return ABC
 
         self.assertTrue(issubclass(test_callable(), object))

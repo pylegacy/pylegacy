@@ -1,4 +1,4 @@
-"""Tests for :mod:`pylegacy.builtins`."""
+"""Tests for :mod:`pylegacy.stdlib.builtins`."""
 
 import sys
 try:
@@ -8,7 +8,7 @@ except ImportError:
 
 
 class TestPyLegacyBuiltins(unittest.TestCase):
-    """Unittest class for :mod:`pylegacy.builtins`."""
+    """Unittest class for :mod:`pylegacy.stdlib.builtins`."""
 
     def setUp(self):
         """Define the test scope variables."""
@@ -26,9 +26,9 @@ class TestPyLegacyBuiltins(unittest.TestCase):
         self.assertRaises(NameError, test_callable)
 
     def test_pylegacy_callable_available(self):
-        """Test that :class:`pylegacy.builtins.callable` is available."""
+        """Test that :class:`pylegacy.stdlib.builtins.callable` is available."""
 
-        from pylegacy.builtins import callable
+        from pylegacy.stdlib.builtins import callable
 
         self.assertTrue(callable(int))
         self.assertFalse(callable(1))
@@ -48,7 +48,7 @@ class TestPyLegacyBuiltins(unittest.TestCase):
         """Test that :class:`ResourceWarning` exists with :mod:`pylegacy`."""
 
         import warnings
-        from pylegacy.builtins import ResourceWarning
+        from pylegacy.stdlib.builtins import ResourceWarning
 
         with self.assertWarns(ResourceWarning):
             warnings.warn("this is a ResourceWarning message", ResourceWarning)
@@ -67,38 +67,38 @@ class TestPyLegacyBuiltins(unittest.TestCase):
     def test_pylegacy_basestring_available(self):
         """Test that :class:`basestring` exists with :mod:`pylegacy`."""
 
-        from pylegacy.builtins import basestring
+        from pylegacy.stdlib.builtins import basestring
         self.assertTrue(basestring)
 
     def test_pylegacy_basestring_error_instance_creation(self):
         """Test that :class:`basestring` exists with :mod:`pylegacy`."""
 
-        from pylegacy.builtins import basestring
+        from pylegacy.stdlib.builtins import basestring
         self.assertRaises(TypeError, basestring, "hello")
 
     def test_pylegacy_basestring_contructor_error_unsafe_creation(self):
         """Test :class:`basestring` constructor error if called directly."""
 
-        from pylegacy.builtins import basestring
+        from pylegacy.stdlib.builtins import basestring
 
         self.assertRaises(TypeError, basestring.__new__, str, "hello")
 
     def test_pylegacy_basestring_contructor_error_invalid_object(self):
         """Test :class:`basestring` constructor error with invalid object."""
 
-        from pylegacy.builtins import basestring
+        from pylegacy.stdlib.builtins import basestring
         self.assertRaises(TypeError, basestring.__new__, 1)
 
     def test_pylegacy_basestring_contructor_error_invalid_type(self):
         """Test :class:`basestring` constructor error with invalid type."""
 
-        from pylegacy.builtins import basestring
+        from pylegacy.stdlib.builtins import basestring
         self.assertRaises(TypeError, basestring.__new__, int, 1)
 
     def test_pylegacy_basestring_setattr_error(self):
         """Test :class:`basestring` error if trying to set attributes"""
 
-        from pylegacy.builtins import basestring
+        from pylegacy.stdlib.builtins import basestring
 
         def test_callable():
             """Helper function."""
@@ -109,26 +109,26 @@ class TestPyLegacyBuiltins(unittest.TestCase):
     def test_pylegacy_basestring_isinstance_true(self):
         """Assert that Python 3 strings are recognised as basestrings."""
 
-        from pylegacy.builtins import basestring
+        from pylegacy.stdlib.builtins import basestring
         self.assertIsInstance("hello", basestring)
 
     def test_pylegacy_basestring_isinstance_false(self):
         """Assert that bytes are recognised as basestrings only in Python 2."""
 
-        from pylegacy.builtins import basestring
+        from pylegacy.stdlib.builtins import basestring
         result = sys.version_info[0] < 3
         self.assertTrue(isinstance(b"hello", basestring) is result)
 
     def test_pylegacy_basestring_issubclass_true(self):
         """Assert that `str` is a subclass of `basestring`."""
 
-        from pylegacy.builtins import basestring
+        from pylegacy.stdlib.builtins import basestring
         self.assertTrue(issubclass(str, basestring))
 
     def test_pylegacy_basestring_issubclass_false(self):
         """Assert that `bytes` is a subclass of `basestring` only in Python 2."""
 
-        from pylegacy.builtins import basestring
+        from pylegacy.stdlib.builtins import basestring
         result = sys.version_info[0] < 3
         self.assertTrue(issubclass(bytes, basestring) is result)
 

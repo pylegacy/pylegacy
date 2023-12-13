@@ -22,7 +22,7 @@ os.makedirs("example_folder", exist_ok=True)
 
 with the following working code snippet:
 ```python
-from pylegacy import os
+from pylegacy.stdlib import os
 os.makedirs("example_folder", exist_ok=True)
 ```
 

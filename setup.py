@@ -36,7 +36,7 @@ setup(**{
     "name":
         "pylegacy",
     "version":
-        get_version("pylegacy"),
+        get_version("pylegacy.stdlib"),
     "license":
         "MIT",
     "description":

@@ -1,4 +1,4 @@
-"""Tests for :mod:`pylegacy.exceptions`."""
+"""Tests for :mod:`pylegacy.stdlib.exceptions`."""
 
 import sys
 try:
@@ -8,22 +8,22 @@ except ImportError:
 
 
 class TestPyLegacyExceptions(unittest.TestCase):
-    """Unittest class for :mod:`pylegacy.exceptions`."""
+    """Unittest class for :mod:`pylegacy.stdlib.exceptions`."""
 
     def setUp(self):
         """Define the test scope variables."""
 
     def test_exceptions_availability(self):
-        """Test availability of :mod:`pylegacy.exceptions` for Py2 or Py3."""
+        """Test availability of :mod:`pylegacy.stdlib.exceptions` for Py2 or Py3."""
 
         def test_callable1():
             """Helper function 1."""
-            import pylegacy.exceptions
-            return isinstance(pylegacy.exceptions, object)
+            import pylegacy.stdlib.exceptions
+            return isinstance(pylegacy.stdlib.exceptions, object)
 
         def test_callable2():
             """Helper function 2."""
-            from pylegacy import exceptions
+            from pylegacy.stdlib import exceptions
             return isinstance(exceptions, object)
 
         if sys.version_info[:1] < (3,):
@@ -38,7 +38,7 @@ class TestPyLegacyExceptions(unittest.TestCase):
         """Test that :class:`ResourceWarning` exists with :mod:`pylegacy`."""
 
         import warnings
-        from pylegacy.exceptions import ResourceWarning
+        from pylegacy.stdlib.exceptions import ResourceWarning
 
         with self.assertWarns(ResourceWarning):
             warnings.warn("this is a ResourceWarning message", ResourceWarning)

@@ -1,4 +1,4 @@
-"""Tests for :mod:`pylegacy.tempfile`."""
+"""Tests for :mod:`pylegacy.stdlib.tempfile`."""
 
 import sys
 try:
@@ -8,7 +8,7 @@ except ImportError:
 
 
 class TestPyLegacyTempfile(unittest.TestCase):
-    """Unittest class for :mod:`pylegacy.tempfile`."""
+    """Unittest class for :mod:`pylegacy.stdlib.tempfile`."""
 
     def setUp(self):
         """Define the test scope variables."""
@@ -26,10 +26,10 @@ class TestPyLegacyTempfile(unittest.TestCase):
         self.assertRaises(ImportError, test_callable)
 
     def test_pylegacy_temporarydirectory_available(self):
-        """Test use case of legacy :class:`~pylegacy.tempfile.TemporaryDirectory`."""
+        """Test use case of legacy :class:`~pylegacy.stdlib.tempfile.TemporaryDirectory`."""
 
-        from pylegacy import os
-        from pylegacy.tempfile import TemporaryDirectory
+        from pylegacy.stdlib import os
+        from pylegacy.stdlib.tempfile import TemporaryDirectory
 
         with TemporaryDirectory() as tmpdir:
             tmpname = tmpdir
@@ -39,11 +39,11 @@ class TestPyLegacyTempfile(unittest.TestCase):
         self.assertFalse(os.path.exists(tmpname))
 
     def test_pylegacy_temporarydirectory_finalize(self):
-        """Test removal of :class:`~pylegacy.tempfile.TemporaryDirectory` reference."""
+        """Test removal of :class:`~pylegacy.stdlib.tempfile.TemporaryDirectory` reference."""
 
-        from pylegacy import os
-        from pylegacy.builtins import ResourceWarning
-        from pylegacy.tempfile import TemporaryDirectory
+        from pylegacy.stdlib import os
+        from pylegacy.stdlib.builtins import ResourceWarning
+        from pylegacy.stdlib.tempfile import TemporaryDirectory
 
         tmpdir = TemporaryDirectory()  # pylint: disable=refactoring
         self.assertTrue(isinstance(tmpdir, TemporaryDirectory))

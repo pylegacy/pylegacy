@@ -1,4 +1,4 @@
-"""Tests for :mod:`pylegacy.os`."""
+"""Tests for :mod:`pylegacy.stdlib.os`."""
 
 import sys
 try:
@@ -8,7 +8,7 @@ except ImportError:
 
 
 class TestPyLegacyOs(unittest.TestCase):
-    """Unittest class for :mod:`pylegacy.os`."""
+    """Unittest class for :mod:`pylegacy.stdlib.os`."""
 
     def setUp(self):
         """Define the test scope variables."""
@@ -47,7 +47,7 @@ class TestPyLegacyOs(unittest.TestCase):
     def test_os_missing_attributes_available(self):
         """Test that :mod:`os` attributes are present in Python 3.3 and 3.4."""
 
-        from pylegacy import os
+        from pylegacy.stdlib import os
         for attr in self.os_missing_attrs:
             self.assertTrue(hasattr(os, attr))
 
@@ -66,11 +66,11 @@ class TestPyLegacyOs(unittest.TestCase):
         self.assertRaises(TypeError, os.makedirs, "dummy", exist_ok=True)
 
     def test_pylegacy_os_makedirs(self):
-        """Test usage of :func:`pylegacy.os.makedirs`."""
+        """Test usage of :func:`pylegacy.stdlib.os.makedirs`."""
 
         import shutil
         import tempfile
-        from pylegacy import os
+        from pylegacy.stdlib import os
 
         tmpdir = tempfile.mkdtemp()
         testdir = os.path.join(tmpdir, "dummy", "folder")
