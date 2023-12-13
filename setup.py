@@ -38,7 +38,7 @@ setup(**{
     "version":
         get_version("pylegacy"),
     "license":
-        "Python Software Foundation License",
+        "MIT",
     "description":
         "Backports for abandoned Python versions",
     "long_description":
@@ -55,7 +55,7 @@ setup(**{
         "Development Status :: 3 - Alpha",
         "Environment :: Console",
         "Intended Audience :: Developers",
-        "License :: OSI Approved :: Python Software Foundation License",
+        "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
         "Programming Language :: Python :: 2",
         "Programming Language :: Python :: 2.6",
