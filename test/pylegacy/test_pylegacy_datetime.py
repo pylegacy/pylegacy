@@ -313,7 +313,9 @@ class TestPyLegacyDatetime(unittest.TestCase):
         tz = dt.timezone(offset, name="Athens time")
 
         with NamedTemporaryFile(suffix=".pkl") as tmpfile:
-            # Save to file.
+            # Close temporary file before continuing.
+            tmpfile.close()
+            # Save timezone object to file.
             with open(tmpfile.name, "wb") as tmpfd:
                 pickle.dump(tz, tmpfd)
             # Read file again.
@@ -333,7 +335,9 @@ class TestPyLegacyDatetime(unittest.TestCase):
         tz = dt.timezone(offset)
 
         with NamedTemporaryFile(suffix=".pkl") as tmpfile:
-            # Save to file.
+            # Close temporary file before continuing.
+            tmpfile.close()
+            # Save timezone object to file.
             with open(tmpfile.name, "wb") as tmpfd:
                 pickle.dump(tz, tmpfd)
             # Read file again.

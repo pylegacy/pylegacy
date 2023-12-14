@@ -15,6 +15,9 @@ https://semver.org/spec/v2.0.0.html
 ### Added
 - Support for Python 3.12.
 
+### Fixed
+- Fix `pylegacy.datetime` tests when running on Windows.
+
 ## [0.2.0] - 2023-10-21
 
 ### Added
