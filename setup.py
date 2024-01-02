@@ -38,7 +38,7 @@ setup(**{
     "version":
         get_version("pylegacy"),
     "license":
-        "Python Software Foundation License",
+        "MIT",
     "description":
         "Backports for abandoned Python versions",
     "long_description":
@@ -55,7 +55,7 @@ setup(**{
         "Development Status :: 3 - Alpha",
         "Environment :: Console",
         "Intended Audience :: Developers",
-        "License :: OSI Approved :: Python Software Foundation License",
+        "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
         "Programming Language :: Python :: 2",
         "Programming Language :: Python :: 2.6",
@@ -71,6 +71,7 @@ setup(**{
         "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
+        "Programming Language :: Python :: 3.12",
         "Topic :: Software Development :: Libraries :: Python Modules",
     ],
     "keywords": [
@@ -87,7 +88,7 @@ setup(**{
             ">=2.6",
             "!=3.0.*",
             "!=3.1.*",
-            "<3.12",
+            "<3.13",
         ]),
     "extras_require": {
         "lint":
