@@ -10,7 +10,7 @@ https://keepachangelog.com/en/1.0.0/
 https://semver.org/spec/v2.0.0.html
 
 
-## [Unreleased]
+## [0.2.1] - 2024-01-02
 
 ### Added
 - Support for Python 3.12.
@@ -51,7 +51,9 @@ https://semver.org/spec/v2.0.0.html
 
 
 [Unreleased]:
-https://github.com/pylegacy/pylegacy/compare/v0.2.0...develop
+https://github.com/pylegacy/pylegacy/compare/v0.2.1...develop
+[0.2.1]:
+https://github.com/pylegacy/pylegacy/compare/v0.2.0...v0.2.1
 [0.2.0]:
 https://github.com/pylegacy/pylegacy/compare/v0.1.1...v0.2.0
 [0.1.1]:
